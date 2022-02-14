@@ -2,6 +2,7 @@ package POM;
 
 import POJO.BillingAddress;
 import org.openqa.selenium.By;
+import utils.Interactor;
 
 public class CheckoutPage extends BasePage{
 
@@ -11,6 +12,7 @@ public class CheckoutPage extends BasePage{
     private final By cityInput = By.name("billing_city");
     private final By postalCodeInput = By.name("billing_postcode");
     private final By emailInput = By.name("billing_email");
+    private final By placeOrderBtn = By.name("woocomerce_checkout_place_order");
 
     public void setBillingAddress(BillingAddress ba){
         enterFirstName(ba.getFirstName());
@@ -43,5 +45,9 @@ public class CheckoutPage extends BasePage{
 
     public void enterEmail(String email){
         driver.findElement(emailInput).sendKeys(email);
+    }
+
+    public void placeOrder(){
+        Interactor.findElement(driver, placeOrderBtn).click();
     }
 }

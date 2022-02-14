@@ -2,6 +2,7 @@ package POM;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import utils.Interactor;
 
 public class MainPage extends BasePage{
 
@@ -14,7 +15,7 @@ public class MainPage extends BasePage{
     public void clickOnSuperiorLink(String name) {
         WebElement elem;
         switch(name){
-            case "Store": elem = driver.findElement(loc_storeLink); break;
+            case "Store": elem = Interactor.findElement(driver,loc_storeLink); break;
             default: elem = null;
         }
         if(elem==null)

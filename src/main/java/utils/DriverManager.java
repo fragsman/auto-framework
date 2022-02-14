@@ -27,11 +27,9 @@ public class DriverManager {
             case EDGE :
                 //System.setProperty(configReader.getDriverKey(),configReader.getDriverPath());
                 //We currently have the path set up on an Environment Variable. This is another way which will work too
-                EdgeOptions options = new EdgeOptions();
-                options.setPageLoadStrategy(PageLoadStrategy.EAGER);
-                options.setPageLoadTimeout(Duration.ofSeconds(configReader.getImplicitWaitTime()));
-                options.setImplicitWaitTimeout(Duration.ofSeconds(configReader.getImplicitWaitTime()));
-                driver = new EdgeDriver(options);
+                driver = new EdgeDriver();
+                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(configReader.getImplicitWaitTime()));
+                driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(configReader.getImplicitWaitTime()));
                 break;
             case FIREFOX : //to-implement
                 break;

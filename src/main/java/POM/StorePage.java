@@ -1,13 +1,18 @@
 package POM;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import utils.Interactor;
+
+import java.util.List;
 
 public class StorePage extends BasePage{
 
-    private final String products = ".products img";
+    private final By products = By.cssSelector(".products img");
 
     public void clickOnFirstAvailableProduct(){
-        driver.findElements(By.cssSelector(products)).get(0).click();
+        List<WebElement> productLinks = Interactor.findElements(driver, products);
+        productLinks.get(0).click();
     }
 }
 
