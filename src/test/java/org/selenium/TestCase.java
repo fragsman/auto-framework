@@ -11,14 +11,14 @@ public class TestCase extends BaseTest{
 
     @Test
     public void simpleTest() {
-        BillingAddress billingAddress = new BillingAddress();
-        InputStream is = getClass().getClassLoader().getResourceAsStream("billingAddress.json");
-        billingAddress = JacksonUtil.deserializeJson(is, billingAddress);
+
+        BillingAddress billingAddress = JacksonUtil.deserializeJson("billingAddress.json", BillingAddress.class);
 
         MainPage mainPage = new MainPage();
         mainPage.clickOnSuperiorLink("Store");
 
         StorePage storePage = new StorePage();
+        storePage.createListOfProducts(); /** TESTING **/
         storePage.clickOnFirstAvailableProduct();
 
         ProductDetailPage productDetailPage = new ProductDetailPage();
