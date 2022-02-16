@@ -11,7 +11,6 @@ public class TestCase extends BaseTest{
 
     @Test
     public void simpleTest() {
-
         BillingAddress billingAddress = JacksonUtil.deserializeJson("billingAddress.json", BillingAddress.class);
 
         MainPage mainPage = new MainPage();

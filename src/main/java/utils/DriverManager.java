@@ -1,10 +1,7 @@
 package utils;
 
-import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
-
 import java.time.Duration;
 
 public class DriverManager {
@@ -28,8 +25,8 @@ public class DriverManager {
                 //System.setProperty(configReader.getDriverKey(),configReader.getDriverPath());
                 //We currently have the path set up on an Environment Variable. This is another way which will work too
                 driver = new EdgeDriver();
-                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(configReader.getImplicitWaitTime()));
                 driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(configReader.getImplicitWaitTime()));
+                Logger.Log("Edge Driver created!");
                 break;
             case FIREFOX : //to-implement
                 break;
@@ -42,6 +39,7 @@ public class DriverManager {
     }
 
     public static void closeDriver() {
+        Logger.Log("Edge Driver closed!");
         driver.close();
         driver.quit();
     }
