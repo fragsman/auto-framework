@@ -4,6 +4,7 @@ public class BillingAddress {
 
     private String firstName;
     private String lastName;
+    private String country;
     private String addressLineOne;
     private String city;
     private String postalCode;
@@ -67,5 +68,13 @@ public class BillingAddress {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

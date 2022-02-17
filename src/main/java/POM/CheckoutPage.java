@@ -2,6 +2,7 @@ package POM;
 
 import POJO.BillingAddress;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import utils.Interactor;
 
 public class CheckoutPage extends BasePage{
@@ -13,10 +14,12 @@ public class CheckoutPage extends BasePage{
     private final By postalCodeInput = By.name("billing_postcode");
     private final By emailInput = By.name("billing_email");
     private final By placeOrderBtn = By.name("woocomerce_checkout_place_order");
+    private final By selectCountry = By.cssSelector("span.select2-selection span");
 
     public void setBillingAddress(BillingAddress ba){
         enterFirstName(ba.getFirstName());
         enterLastName(ba.getLastName());
+        enterCountry(ba.getCountry());
         enterAddressLine1(ba.getAddressLineOne());
         enterCity(ba.getCity());
         enterPostalCode(ba.getPostalCode());
@@ -49,5 +52,12 @@ public class CheckoutPage extends BasePage{
 
     public void placeOrder(){
         Interactor.findElement(driver, placeOrderBtn).click();
+    }
+
+    public void enterCountry(String country){
+        WebElement selectCountrySelector = Interactor.findElement(driver, selectCountry);
+        selectCountrySelector.click();
+        Interactor.selectOption(driver, selectCountrySelector, country);
+        waitForBlockingOverlays();
     }
 }
