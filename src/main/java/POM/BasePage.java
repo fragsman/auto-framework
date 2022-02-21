@@ -3,17 +3,16 @@ package POM;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import utils.DriverManager;
 import utils.Interactor;
 import java.util.List;
 
 public class BasePage {
 
-    protected static WebDriver driver;
+    protected WebDriver driver;
     protected final By overlayBlockers = By.cssSelector("div.blockUI.blockOverlay");
 
-    public BasePage(){
-        driver = DriverManager.getDriver();
+    public BasePage(WebDriver driver){
+        this.driver = driver;
     }
 
     public void navigateToMainPage(){
@@ -21,7 +20,9 @@ public class BasePage {
     }
 
     public void waitForBlockingOverlays(){
-        List<WebElement> blockingOverlays = Interactor.findElements(driver,overlayBlockers);
-        Interactor.waitForBlockingOverlays(driver, blockingOverlays);
+        List<WebElement> blockingOverlays = Interactor.findElements(driver,overlayBlockers,1);
+        if(blockingOverlays.size() > 0){
+            Interactor.waitForBlockingOverlays(driver, blockingOverlays);
+        }
     }
 }

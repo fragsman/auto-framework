@@ -1,11 +1,16 @@
 package POM;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import utils.Interactor;
 
 public class HeaderBar extends BasePage{
     private final By cartIcon = By.xpath("//div[@id='ast-desktop-header']//div[@class='ast-cart-menu-wrap']");
     private final By cartIconCount = By.xpath("//div[@id='ast-desktop-header']//div[@class='ast-cart-menu-wrap']/span");
+
+    public HeaderBar(WebDriver driver) {
+        super(driver);
+    }
 
     public void enterToCart() {
         Interactor.findElement(driver, cartIcon).click();

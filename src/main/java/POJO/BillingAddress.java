@@ -7,12 +7,12 @@ public class BillingAddress {
     private String country;
     private String addressLineOne;
     private String city;
+    private String state;
     private String postalCode;
     private String email;
 
-    public BillingAddress(){
+    public BillingAddress(){}
 
-    }
     public BillingAddress(String firstName, String lastName, String addressLineOne, String city, String postalCode, String email){
         this.firstName = firstName;
         this.lastName = lastName;
@@ -76,5 +76,13 @@ public class BillingAddress {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

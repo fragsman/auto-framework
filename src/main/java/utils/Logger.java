@@ -6,7 +6,19 @@ import java.util.Date;
 
 public class Logger {
 
-    public static void Log(String message){
+    //Logs an error message
+    public static void Error(String message){
+        Date now = new Date();
+        DateFormat df = new SimpleDateFormat("YYYY/MM/dd HH:mm:ss");
+        String formattedDate = df.format(now);
+
+        //TODO: Write to a file
+
+        System.out.println("LOG: "+ formattedDate + ": "+message);
+    }
+
+    //Logs an informative message (can be used for debugging)
+    public static void Info(String message){
         Date now = new Date();
         DateFormat df = new SimpleDateFormat("YYYY/MM/dd HH:mm:ss");
         String formattedDate = df.format(now);

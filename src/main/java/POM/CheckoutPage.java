@@ -2,6 +2,7 @@ package POM;
 
 import POJO.BillingAddress;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import utils.Interactor;
 
@@ -13,8 +14,14 @@ public class CheckoutPage extends BasePage{
     private final By cityInput = By.name("billing_city");
     private final By postalCodeInput = By.name("billing_postcode");
     private final By emailInput = By.name("billing_email");
-    private final By placeOrderBtn = By.name("woocomerce_checkout_place_order");
-    private final By selectCountry = By.cssSelector("span.select2-selection span");
+    private final By placeOrderBtn = By.cssSelector("#place_order");
+    private final By countrySelect = By.cssSelector("span.select2-selection span");
+    private final By stateSelect = By.id("select2-billing_state-container");
+
+    public CheckoutPage(WebDriver driver){
+        super(driver);
+        waitForBlockingOverlays();
+    }
 
     public void setBillingAddress(BillingAddress ba){
         enterFirstName(ba.getFirstName());
@@ -22,6 +29,7 @@ public class CheckoutPage extends BasePage{
         enterCountry(ba.getCountry());
         enterAddressLine1(ba.getAddressLineOne());
         enterCity(ba.getCity());
+        enterState(ba.getState());
         enterPostalCode(ba.getPostalCode());
         enterEmail(ba.getEmail());
     }
@@ -44,6 +52,7 @@ public class CheckoutPage extends BasePage{
 
     public void enterPostalCode(String postalCode){
         driver.findElement(postalCodeInput).sendKeys(postalCode);
+        waitForBlockingOverlays();
     }
 
     public void enterEmail(String email){
@@ -51,13 +60,21 @@ public class CheckoutPage extends BasePage{
     }
 
     public void placeOrder(){
-        Interactor.findElement(driver, placeOrderBtn).click();
+        WebElement checkoutBtn = Interactor.findElement(driver, placeOrderBtn);
+        Interactor.accurateClick(driver, checkoutBtn);
     }
 
     public void enterCountry(String country){
-        WebElement selectCountrySelector = Interactor.findElement(driver, selectCountry);
+        WebElement selectCountrySelector = Interactor.findElement(driver, countrySelect);
         selectCountrySelector.click();
         Interactor.selectOption(driver, selectCountrySelector, country);
+        waitForBlockingOverlays();
+    }
+
+    public void enterState(String stateText){
+        WebElement selectStateSelector = Interactor.findElement(driver,stateSelect);
+        selectStateSelector.click();
+        Interactor.selectOption(driver,selectStateSelector, stateText);
         waitForBlockingOverlays();
     }
 }

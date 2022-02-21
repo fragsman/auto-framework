@@ -5,31 +5,29 @@ import POM.*;
 import org.testng.annotations.Test;
 import utils.JacksonUtil;
 
-import java.io.InputStream;
-
 public class TestCase extends BaseTest{
 
     @Test
     public void simpleTest() {
         BillingAddress billingAddress = JacksonUtil.deserializeJson("billingAddress.json", BillingAddress.class);
 
-        MainPage mainPage = new MainPage();
+        MainPage mainPage = new MainPage(driver);
         mainPage.clickOnSuperiorLink("Store");
 
-        StorePage storePage = new StorePage();
-        storePage.createListOfProducts(); /** TESTING **/
+        StorePage storePage = new StorePage(driver);
+        //storePage.createListOfProducts(); /** TESTING **/
         storePage.clickOnFirstAvailableProduct();
 
-        ProductDetailPage productDetailPage = new ProductDetailPage();
+        ProductDetailPage productDetailPage = new ProductDetailPage(driver);
         productDetailPage.clickAddToCartButton();
 
-        HeaderBar headerBar = new HeaderBar();
+        HeaderBar headerBar = new HeaderBar(driver);
         headerBar.enterToCart();
 
-        CartPage cartPage = new CartPage();
+        CartPage cartPage = new CartPage(driver);
         cartPage.clickOnProceedToCheckout();
 
-        CheckoutPage checkoutPage = new CheckoutPage();
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
         checkoutPage.setBillingAddress(billingAddress);
         checkoutPage.placeOrder();
     }

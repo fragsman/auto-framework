@@ -3,8 +3,10 @@ package POM;
 import POJO.Product;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import utils.Interactor;
+import utils.Logger;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,6 +17,10 @@ public class StorePage extends BasePage{
     private final By products = By.cssSelector(".products img");
     private final By productNames = By.cssSelector("a h2");
     private final By addToCartButtons = By.xpath("//a[contains(text(),'Add to cart')]");
+
+    public StorePage(WebDriver driver) {
+        super(driver);
+    }
 
     public void clickOnFirstAvailableProduct(){
         List<WebElement> productLinks = Interactor.findElements(driver, products);
@@ -54,7 +60,7 @@ public class StorePage extends BasePage{
             listOfProducts.add(product);
         }
         for (Product p : listOfProducts){
-            System.out.println("Product Id: "+p.getId()+", name: "+p.getName());
+            Logger.Info("Product Id: " + p.getId() + ", name: " + p.getName());
         }
     }
 }

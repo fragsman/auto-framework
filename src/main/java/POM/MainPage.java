@@ -1,15 +1,17 @@
 package POM;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import utils.Interactor;
+import utils.Logger;
 
 public class MainPage extends BasePage{
 
     private final By loc_storeLink = By.xpath("//li[@id='menu-item-1227']/a");
 
-    public MainPage(){
-        super();
+    public MainPage(WebDriver driver) {
+        super(driver);
     }
 
     public void clickOnSuperiorLink(String name) {
@@ -19,7 +21,7 @@ public class MainPage extends BasePage{
             default: elem = null;
         }
         if(elem==null)
-            System.out.println("clickOnSuperiorLink: "+name+", not a valid option");
+            Logger.Info("clickOnSuperiorLink: " + name + ", not a valid option");
         else
             elem.click();
     }
