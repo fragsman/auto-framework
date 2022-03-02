@@ -6,20 +6,18 @@ import java.time.Duration;
 
 public class DriverManager {
 
-    private WebDriver driver;
     private DriverType driverType;
     private ConfigReader configReader;
 
     public WebDriver getDriver() {
-        if(driver==null) {
-            configReader = new ConfigReader();
-            driverType = configReader.getBrowser();
-            createDriver();
-        }
+        configReader = new ConfigReader();
+        driverType = configReader.getBrowser();
+        WebDriver driver = createDriver();
         return driver;
     }
 
-    private void createDriver() {
+    private WebDriver createDriver() {
+        WebDriver driver = null;
         switch (driverType) {
             case EDGE :
                 //System.setProperty(configReader.getDriverKey(),configReader.getDriverPath());
@@ -36,11 +34,7 @@ public class DriverManager {
 
         if(configReader.getBrowserWindowMaximized())
             driver.manage().window().maximize();
-    }
 
-    public void closeDriver() {
-        Logger.Info("Edge Driver closed!");
-        driver.close();
-        driver.quit();
+        return driver;
     }
 }

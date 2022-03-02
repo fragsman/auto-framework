@@ -2,25 +2,33 @@ package org.selenium;
 
 import POM.BasePage;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import utils.DriverManager;
 
 public class BaseTest {
 
-    protected WebDriver driver;
+    private ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     protected DriverManager driverManager;
 
-    @BeforeTest
+    @BeforeMethod
     public void navigateToWebsiteToTest(){
         driverManager = new DriverManager();
-        driver = driverManager.getDriver();
-        BasePage basePage = new BasePage(driver);
+        setDriver(driverManager.getDriver());
+        BasePage basePage = new BasePage(getDriver());
         basePage.navigateToMainPage();
     }
 
-    @AfterTest
+    @AfterMethod
     public void closeBrowser(){
-        driverManager.closeDriver();
+        driver.get().quit();
+    }
+
+    public WebDriver getDriver() {
+        return driver.get();
+    }
+
+    private void setDriver(WebDriver driver) {
+        this.driver.set(driver);
     }
 }
