@@ -10,10 +10,10 @@ import java.util.Properties;
 public class ConfigReader {
     private static ConfigReader configReader;
     private static Properties properties;
-    private final String propertyFilePath= "src/main/java/utils/driver-config.properties";
 
     private ConfigReader(){
         BufferedReader reader;
+        String propertyFilePath = getPropertiesFilePath();
         try {
             reader = new BufferedReader(new FileReader(propertyFilePath));
             properties = new Properties();
@@ -29,6 +29,19 @@ public class ConfigReader {
         }
     }
 
+    private String getPropertiesFilePath(){
+        //the env property can be injected by maven command line or depend on CI-CD tool configuration.
+        String env = System.getProperty("env",String.valueOf(EnvType.QA));
+        String filePath;
+        switch(env){
+            case "DEV": filePath = "src/main/java/properties/dev-config.properties"; break;
+            case "QA": filePath = "src/main/java/properties/qa-config.properties"; break;
+            case "STG": filePath = "src/main/java/properties/stg-config.properties"; break;
+            default: throw new RuntimeException("Environment does not exist");
+        }
+        return filePath;
+    }
+
     public static ConfigReader getInstance(){
         if(configReader==null)
             configReader = new ConfigReader();
@@ -40,7 +53,7 @@ public class ConfigReader {
         if(driverPath!= null)
             return driverPath;
         else
-            throw new RuntimeException("Driver Path not found. Check driver-config.properties");
+            throw new RuntimeException("Driver Path not found. Check config.properties");
     }
 
     public long getImplicitWaitTime() {
@@ -80,7 +93,7 @@ public class ConfigReader {
         if(driverPath!= null)
             return driverPath;
         else
-            throw new RuntimeException("Driver Key not found. Check driver-config.properties");
+            throw new RuntimeException("Driver Key not found. Check config.properties");
     }
 
     public String getBaseUrl() {
@@ -88,6 +101,6 @@ public class ConfigReader {
         if (baseUrl != null)
             return baseUrl;
         else
-            throw new RuntimeException("baseUrl not found. Check driver-config.properties");
+            throw new RuntimeException("baseUrl not found. Check config.properties");
     }
 }
