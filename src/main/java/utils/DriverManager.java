@@ -7,11 +7,9 @@ import java.time.Duration;
 public class DriverManager {
 
     private DriverType driverType;
-    private ConfigReader configReader;
 
     public WebDriver getDriver() {
-        configReader = new ConfigReader();
-        driverType = configReader.getBrowser();
+        driverType = ConfigReader.getInstance().getBrowser();
         WebDriver driver = createDriver();
         return driver;
     }
@@ -23,7 +21,7 @@ public class DriverManager {
                 //System.setProperty(configReader.getDriverKey(),configReader.getDriverPath());
                 //We currently have the path set up on an Environment Variable. This is another way which will work too
                 driver = new EdgeDriver();
-                driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(configReader.getImplicitWaitTime()));
+                driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(ConfigReader.getInstance().getImplicitWaitTime()));
                 Logger.Info("Edge Driver created!");
                 break;
             case FIREFOX : //to-implement
@@ -32,7 +30,7 @@ public class DriverManager {
                 break;
         }
 
-        if(configReader.getBrowserWindowMaximized())
+        if(ConfigReader.getInstance().getBrowserWindowMaximized())
             driver.manage().window().maximize();
 
         return driver;

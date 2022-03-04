@@ -8,10 +8,11 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigReader {
+    private static ConfigReader configReader;
     private static Properties properties;
     private final String propertyFilePath= "src/main/java/utils/driver-config.properties";
 
-    public ConfigReader(){
+    private ConfigReader(){
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(propertyFilePath));
@@ -26,6 +27,12 @@ public class ConfigReader {
             e.printStackTrace();
             throw new RuntimeException("Configuration.properties failed to open. Path: " + propertyFilePath);
         }
+    }
+
+    public static ConfigReader getInstance(){
+        if(configReader==null)
+            configReader = new ConfigReader();
+        return configReader;
     }
 
     public String getDriverPath(){
@@ -74,5 +81,13 @@ public class ConfigReader {
             return driverPath;
         else
             throw new RuntimeException("Driver Key not found. Check driver-config.properties");
+    }
+
+    public String getBaseUrl() {
+        String baseUrl = properties.getProperty("baseUrl");
+        if (baseUrl != null)
+            return baseUrl;
+        else
+            throw new RuntimeException("baseUrl not found. Check driver-config.properties");
     }
 }
