@@ -9,6 +9,7 @@ import utils.Logger;
 public class MainPage extends BasePage{
 
     private final By loc_storeLink = By.xpath("//li[@id='menu-item-1227']/a");
+    private final By loc_menLink = By.xpath("//li[@id='menu-item-1228']/a");
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -18,6 +19,7 @@ public class MainPage extends BasePage{
         WebElement elem;
         switch(name){
             case "Store": elem = Interactor.findElement(driver,loc_storeLink); break;
+            case "Men": elem = driver.findElement(loc_menLink); break;
             default: elem = null;
         }
         if(elem==null)

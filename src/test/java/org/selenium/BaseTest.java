@@ -21,6 +21,7 @@ public class BaseTest {
 
     @AfterMethod
     public void closeBrowser(){
+    	driver.get().close();
         driver.get().quit();
     }
 

@@ -1,7 +1,10 @@
 package utils;
 
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
+
 import java.time.Duration;
 
 public class DriverManager {
@@ -18,9 +21,13 @@ public class DriverManager {
         WebDriver driver = null;
         switch (driverType) {
             case EDGE :
-                //System.setProperty(configReader.getDriverKey(),configReader.getDriverPath());
-                //We currently have the path set up on an Environment Variable. This is another way which will work too
-                driver = new EdgeDriver();
+            	System.setProperty(ConfigReader.getDriverKey(),ConfigReader.getDriverPath());
+                //Another option is to have the path set up on an Environment Variable.
+                EdgeOptions options = new EdgeOptions();
+                options.setPageLoadStrategy(PageLoadStrategy.EAGER);
+                options.setPageLoadTimeout(Duration.ofSeconds(ConfigReader.getImplicitWaitTime()));
+                options.setImplicitWaitTimeout(Duration.ofSeconds(ConfigReader.getImplicitWaitTime()));
+                driver = new EdgeDriver(options);
                 driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(ConfigReader.getInstance().getImplicitWaitTime()));
                 Logger.Info("Edge Driver created!");
                 break;

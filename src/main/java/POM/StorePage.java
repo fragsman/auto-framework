@@ -17,11 +17,16 @@ public class StorePage extends BasePage{
     private final By products = By.cssSelector(".products img");
     private final By productNames = By.cssSelector("a h2");
     private final By addToCartButtons = By.xpath("//a[contains(text(),'Add to cart')]");
+    private final By currentPageLink = By.className("woocommerce-breadcrumb");
 
     public StorePage(WebDriver driver) {
         super(driver);
     }
 
+    public String getCurrentPageInNav() {
+    	return Interactor.findElement(driver, currentPageLink).getText().split("/")[1].trim();
+    }
+    
     public void clickOnFirstAvailableProduct(){
         List<WebElement> productLinks = Interactor.findElements(driver, products);
         productLinks.get(0).click();
