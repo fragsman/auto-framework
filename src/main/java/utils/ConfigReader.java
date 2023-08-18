@@ -48,7 +48,7 @@ public class ConfigReader {
         return configReader;
     }
 
-    public String getDriverPath(){
+    public static String getDriverPath(){
         String driverPath = properties.getProperty("driverPath");
         if(driverPath!= null)
             return driverPath;
@@ -56,7 +56,7 @@ public class ConfigReader {
             throw new RuntimeException("Driver Path not found. Check config.properties");
     }
 
-    public long getImplicitWaitTime() {
+    public static long getImplicitWaitTime() {
         String implicitlyWait = properties.getProperty("implicitlyWait");
         if(implicitlyWait != null) {
             try{
@@ -88,7 +88,7 @@ public class ConfigReader {
         return true;
     }
 
-    public String getDriverKey(){
+    public static String getDriverKey(){
         String driverPath = properties.getProperty("driverKey");
         if(driverPath!= null)
             return driverPath;

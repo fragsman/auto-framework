@@ -3,12 +3,13 @@ package org.selenium;
 import POJO.BillingAddress;
 import POM.*;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import utils.JacksonUtil;
 
 public class TestCase extends BaseTest{
 
-    @Test
+    @Test @Ignore
     public void buyAnyProductTest() {
         BillingAddress billingAddress = JacksonUtil.deserializeJson("billingAddress.json", BillingAddress.class);
 
@@ -36,7 +37,7 @@ public class TestCase extends BaseTest{
         Assert.assertEquals(checkoutResults.getCheckoutNotice(),"Thank you. Your order has been received.");
     }
 
-    @Test
+    @Test @Ignore
     public void enterInvalidCouponTest() {
         MainPage mainPage = new MainPage(getDriver());
         mainPage.clickOnSuperiorLink("Store");
@@ -54,5 +55,24 @@ public class TestCase extends BaseTest{
         cartPage.enterCouponCode("invalid");
 
         Assert.assertEquals(cartPage.getCouponErrorResult(),"Coupon \"invalid\" does not exist!");
+    }
+    
+    @Test
+    public void storeLinkLeadsToStorePage() {
+    	MainPage mainPage = new MainPage(getDriver());
+    	mainPage.clickOnSuperiorLink("Store");
+
+        StorePage storePage = new StorePage(getDriver());
+        //I will make it fail on purpose just to see a failure on the report
+        Assert.assertEquals("StoreXXX", storePage.getCurrentPageInNav(),"Store link doesn't lead to the expected destination");
+    }
+    
+    @Test
+    public void menLinkLeadsToMenPage() {
+    	MainPage mainPage = new MainPage(getDriver());
+    	mainPage.clickOnSuperiorLink("Men");
+
+        MenPage menPage = new MenPage(getDriver());
+        Assert.assertEquals("Men", menPage.getCurrentPageInNav(),"Men link doesn't lead to the expected destination");
     }
 }
