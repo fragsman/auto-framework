@@ -28,7 +28,7 @@ public class DriverManager {
                 options.setPageLoadTimeout(Duration.ofSeconds(ConfigReader.getImplicitWaitTime()));
                 options.setImplicitWaitTimeout(Duration.ofSeconds(ConfigReader.getImplicitWaitTime()));
                 driver = new EdgeDriver(options);
-                driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(ConfigReader.getInstance().getImplicitWaitTime()));
+                driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(ConfigReader.getImplicitWaitTime()));
                 Logger.Info("Edge Driver created!");
                 break;
             case FIREFOX : //to-implement

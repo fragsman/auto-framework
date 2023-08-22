@@ -7,4 +7,8 @@
             <class name="org.selenium.TestCase"/>
         </classes>
     </test>
+    
+    <listeners>
+		<listener class-name="org.selenium.BaseTest"></listener>
+	</listeners>
 </suite>
