@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import utils.JacksonUtil;
+import utils.Logger;
 
 public class TestCase extends BaseTest{
 
