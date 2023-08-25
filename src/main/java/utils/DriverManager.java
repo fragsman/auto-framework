@@ -23,7 +23,8 @@ public class DriverManager {
             case EDGE :
             	System.setProperty(ConfigReader.getDriverKey(),ConfigReader.getDriverPath());
                 //Another option is to have the path set up on an Environment Variable.
-                EdgeOptions options = new EdgeOptions();
+                
+            	EdgeOptions options = new EdgeOptions();
                 options.setPageLoadStrategy(PageLoadStrategy.EAGER);
                 options.setPageLoadTimeout(Duration.ofSeconds(ConfigReader.getImplicitWaitTime()));
                 options.setImplicitWaitTimeout(Duration.ofSeconds(ConfigReader.getImplicitWaitTime()));

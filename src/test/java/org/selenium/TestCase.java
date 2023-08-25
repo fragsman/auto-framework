@@ -6,7 +6,6 @@ import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import utils.JacksonUtil;
-import utils.Logger;
 
 public class TestCase extends BaseTest{
 
@@ -75,5 +74,14 @@ public class TestCase extends BaseTest{
 
         MenPage menPage = new MenPage(getDriver());
         Assert.assertEquals("Men", menPage.getCurrentPageInNav(),"Men link doesn't lead to the expected destination");
+    }
+    
+    @Test
+    public void womenLinkLeadsToWomenPage() {
+    	MainPage mainPage = new MainPage(getDriver());
+    	mainPage.clickOnSuperiorLink("Women");
+
+        WomenPage womenPage = new WomenPage(getDriver());
+        Assert.assertEquals("Women", womenPage.getCurrentPageInNav(),"Women link doesn't lead to the expected destination");
     }
 }
