@@ -9,6 +9,6 @@
     </test>
     
     <listeners>
-		<listener class-name="org.selenium.BaseTest"></listener>
+		<listener class-name="org.selenium.MyTestListener"></listener>
 	</listeners>
 </suite>
