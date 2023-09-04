@@ -8,6 +8,7 @@ import utils.Interactor;
 public class WomenPage extends BasePage {
 
 	private final By currentPageLink = By.className("woocommerce-breadcrumb");
+	private final By title = By.tagName("h1");
 	
 	public WomenPage(WebDriver driver) {
         super(driver);
@@ -15,5 +16,9 @@ public class WomenPage extends BasePage {
 	
     public String getCurrentPageInNav() {
     	return Interactor.findElement(driver, currentPageLink).getText().split("/")[1].trim();
+    }
+    
+    public String getPageTitle() {
+    	return Interactor.findElement(driver, title).getText();
     }
 }

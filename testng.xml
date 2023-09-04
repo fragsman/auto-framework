@@ -2,13 +2,26 @@
 
 <suite name="TestSuite" verbose="1" >
 
-    <test name="Regression1" parallel="methods" thread-count="4">
+	<!-- Currently i'm using 2 threads for running tests as the computer i'm testing on is way too slow -->
+    <test name="Regression1" parallel="methods" thread-count="2">
+		
+		<!-- Groups can be used for example to set up, smoke, functional, regression, etc -->
+		<groups>
+    		<run>
+      			<include name="smoke"/>
+      			<include name="regression"/>
+      			<include name="non_browser_tests"/>
+    		</run>
+  		</groups>
+
         <classes>
-            <class name="org.selenium.TestCase"/>
+            <class name="selenium.askomcdh.ShortTests"/>
+            <class name="selenium.askomcdh.LongTests"/>
+            <class name="selenium.askomcdh.NumericTests"/>
         </classes>
     </test>
     
     <listeners>
-		<listener class-name="org.selenium.MyTestListener"></listener>
+		<listener class-name="support.MyTestListener"></listener>
 	</listeners>
 </suite>
