@@ -14,7 +14,7 @@ public class Logger {
 
         //TODO: Write to a file
 
-        System.out.println("LOG: "+ formattedDate + ": "+message);
+        System.err.println("ERR: "+ formattedDate + ": "+message);
     }
 
     //Logs an informative message (can be used for debugging)
