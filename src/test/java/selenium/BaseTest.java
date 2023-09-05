@@ -1,6 +1,5 @@
 package selenium;
 
-
 import POM.BasePage;
 
 import org.openqa.selenium.WebDriver;
@@ -34,9 +33,14 @@ public class BaseTest{
 
     @AfterMethod(alwaysRun = true)
     public void closeBrowser(){
-    	Logger.Info("BeforeMethod: Closing driver");
-    	driver.get().close();
-        driver.get().quit();
+    	Logger.Info("AfterMethod: Closing driver");
+        try {
+            driver.get().quit();
+            driver.remove();
+        }catch(Exception e) {
+        	Logger.Error("Error closing driver");
+        	e.printStackTrace();
+        }
     }
     
     public WebDriver getDriver() {

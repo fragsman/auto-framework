@@ -28,6 +28,8 @@ public class DriverManager {
                 options.setPageLoadStrategy(PageLoadStrategy.EAGER);
                 options.setPageLoadTimeout(Duration.ofSeconds(ConfigReader.getImplicitWaitTime()));
                 options.setImplicitWaitTimeout(Duration.ofSeconds(ConfigReader.getImplicitWaitTime()));
+                //The line below solves the Connection Reset errors. Details: https://bugs.chromium.org/p/chromedriver/issues/detail?id=3689&q=websocket&can=2
+                //options.addArguments("--user-data-dir=" + System.getProperty("java.io.tmpdir"));
                 driver = new EdgeDriver(options);
                 driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(ConfigReader.getImplicitWaitTime()));
                 Logger.Info("Edge Driver created!");
