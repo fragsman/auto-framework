@@ -1,10 +1,11 @@
 package POM;
 
-import POJO.Product;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import POJO.test.Product;
 import utils.Interactor;
 import utils.Logger;
 

@@ -18,14 +18,12 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 import selenium.BaseTest;
-import utils.DriverManager;
 import utils.Logger;
 
 public class MyTestListener extends TestListenerAdapter {
 
     static private ExtentReports report;
     private ThreadLocal<ExtentTest> test = new ThreadLocal<>();
-    protected DriverManager driverManager;
     
     @Override  
     public void onStart(ITestContext context) {  
@@ -33,7 +31,6 @@ public class MyTestListener extends TestListenerAdapter {
     	report = new ExtentReports();
     	ExtentSparkReporter spark = new ExtentSparkReporter("target/TestReport.html");
         report.attachReporter(spark); 
-        driverManager =  new DriverManager();
     }
     
     @Override

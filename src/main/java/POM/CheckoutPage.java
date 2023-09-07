@@ -1,9 +1,10 @@
 package POM;
 
-import POJO.BillingAddress;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import POJO.test.BillingAddress;
 import utils.Interactor;
 
 public class CheckoutPage extends BasePage{
