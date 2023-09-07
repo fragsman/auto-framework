@@ -1,0 +1,13 @@
+{
+	"browser" : "edge",
+	"headless" : true,
+	"headlessOptions" : {
+		"viewportWidth" : 1024,
+		"viewportHeight" : 768
+	},
+	"windowMaximize":false,
+	"driverPath": "C:\\SeleniumWebDrivers\\EdgeDriver",
+	"implicitlyWait" : 30,
+	"driverKey" : "webdriver.edge.driver",
+	"baseUrl":"https://askomdch.com/"
+}

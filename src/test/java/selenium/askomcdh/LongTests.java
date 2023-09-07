@@ -3,7 +3,7 @@ package selenium.askomcdh;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
-import POJO.BillingAddress;
+import POJO.test.BillingAddress;
 import POM.CartPage;
 import POM.CheckoutPage;
 import POM.CheckoutResults;

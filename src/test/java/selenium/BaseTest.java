@@ -34,13 +34,8 @@ public class BaseTest{
     @AfterMethod(alwaysRun = true)
     public void closeBrowser(){
     	Logger.Info("AfterMethod: Closing driver");
-        try {
-            driver.get().quit();
-            driver.remove();
-        }catch(Exception e) {
-        	Logger.Error("Error closing driver");
-        	e.printStackTrace();
-        }
+        driver.get().quit();
+        driver.remove();
     }
     
     public WebDriver getDriver() {

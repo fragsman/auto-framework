@@ -3,7 +3,7 @@ package POM;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import utils.ConfigReader;
+import utils.EnvironmentManager;
 import utils.Interactor;
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class BasePage {
     }
 
     public void navigateToMainPage(){
-        driver.get(ConfigReader.getInstance().getBaseUrl());
+        driver.get(EnvironmentManager.getInstance().getBaseUrl());
     }
 
     public void waitForBlockingOverlays(){

@@ -1,4 +1,4 @@
-package POJO;
+package POJO.test;
 
 public class Product {
     private Integer id;
