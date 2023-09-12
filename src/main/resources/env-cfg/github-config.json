@@ -6,7 +6,7 @@
 		"viewportHeight" : 768
 	},
 	"windowMaximize":false,
-	"driverPath": "C:\\SeleniumWebDrivers\\EdgeDriver",
+	"driverPath": "C:\\SeleniumWebDrivers\\EdgeDriver\\msedgedriver.exe",
 	"implicitlyWait" : 30,
 	"driverKey" : "webdriver.edge.driver",
 	"baseUrl":"https://askomdch.com/"
