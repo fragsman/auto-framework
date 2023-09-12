@@ -33,3 +33,9 @@ jobs:
     # Current possible values for env=[GITHUB,QA]
     - name: Test with Maven
       run: mvn clean -Denv=GITHUB test
+
+    - name: Archive test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-report
+        path: target/TestReport.html
