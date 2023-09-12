@@ -29,7 +29,7 @@ public class MyTestListener extends TestListenerAdapter {
     public void onStart(ITestContext context) {  
     	Logger.Info("onStart: Configuring extent report");
     	report = new ExtentReports();
-    	ExtentSparkReporter spark = new ExtentSparkReporter("target/TestReport.html");
+    	ExtentSparkReporter spark = new ExtentSparkReporter("target/results/TestReport.html");
         report.attachReporter(spark); 
     }
     
@@ -87,7 +87,7 @@ public class MyTestListener extends TestListenerAdapter {
     		Object currentTestInstance = result.getInstance();
     		File src= ((TakesScreenshot)((BaseTest)currentTestInstance).getDriver()).getScreenshotAs(OutputType.FILE);
     		String currentWorkingDir = System.getProperty("user.dir");
-        	String filePath = currentWorkingDir+"\\target\\error_"+result.getName().split(" ")[0]+".png";
+        	String filePath = currentWorkingDir+"\\target\\results\\error_"+result.getName().split(" ")[0]+".png";
       
         	try {
         		FileUtils.copyFile(src, new File(filePath));
