@@ -87,7 +87,8 @@ public class MyTestListener extends TestListenerAdapter {
     		Object currentTestInstance = result.getInstance();
     		File src= ((TakesScreenshot)((BaseTest)currentTestInstance).getDriver()).getScreenshotAs(OutputType.FILE);
     		String currentWorkingDir = System.getProperty("user.dir");
-        	String filePath = currentWorkingDir+"\\target\\results\\error_"+result.getName().split(" ")[0]+".png";
+    		String filename = "error_"+result.getName().split(" ")[0]+".png";
+        	String filePath = currentWorkingDir+"\\target\\results\\images\\"+filename;
       
         	try {
         		FileUtils.copyFile(src, new File(filePath));
@@ -95,7 +96,7 @@ public class MyTestListener extends TestListenerAdapter {
         	catch (IOException e){
         		Logger.Error("onTestFailure: error taking screenshot: "+e.getMessage());
         	}
-        	test.get().log(Status.FAIL, MediaEntityBuilder.createScreenCaptureFromPath(filePath).build());
+        	test.get().log(Status.FAIL, MediaEntityBuilder.createScreenCaptureFromPath("images\\"+filename).build());
     	}
     	test.get().log(Status.INFO, "Test finished");
     	report.flush();
