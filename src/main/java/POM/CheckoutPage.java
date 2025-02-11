@@ -17,6 +17,7 @@ public class CheckoutPage extends BasePage{
     private final By emailInput = By.name("billing_email");
     private final By placeOrderBtn = By.cssSelector("#place_order");
     private final By countrySelect = By.cssSelector("span.select2-selection span");
+    private final By countrySelectResults = By.cssSelector("span.select2-results");
     private final By stateSelect = By.id("select2-billing_state-container");
 
     public CheckoutPage(WebDriver driver){
@@ -77,5 +78,16 @@ public class CheckoutPage extends BasePage{
         selectStateSelector.click();
         Interactor.selectOption(driver,selectStateSelector, stateText);
         waitForBlockingOverlays();
+    }
+
+    public void selectNthCountry(int countryPosition){
+        WebElement selectCountrySelector = Interactor.findElement(driver,countrySelect);
+        selectCountrySelector.click();
+        WebElement selectCountryResults = Interactor.findElement(driver, countrySelectResults);
+        Interactor.selectNthElement(selectCountryResults,countryPosition);
+    }
+
+    public String getCurrentSelectedCountry(){
+        return Interactor.findElement(driver,countrySelect).getText();
     }
 }

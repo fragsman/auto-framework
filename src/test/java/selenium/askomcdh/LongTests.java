@@ -66,4 +66,29 @@ public class LongTests extends BaseTest {
         MyAssert ma = new MyAssert(getITestContext(), getCurrentMethodName());
         ma.assertEq(cartPage.getCouponErrorResult(), "Coupon \"invalid\" does not exist!", "Check that couppon doesn't exist message appears");
     }
+
+    @Test(groups = {"regression"})
+    public void selectTheThirdOptionInCheckout() {
+        MainPage mainPage = new MainPage(getDriver());
+        mainPage.clickOnSuperiorLink("Store");
+
+        StorePage storePage = new StorePage(getDriver());
+        storePage.clickOnFirstAvailableProduct();
+
+        ProductDetailPage productDetailPage = new ProductDetailPage(getDriver());
+        productDetailPage.clickAddToCartButton();
+
+        HeaderBar headerBar = new HeaderBar(getDriver());
+        headerBar.enterToCart();
+
+        CartPage cartPage = new CartPage(getDriver());
+        cartPage.clickOnProceedToCheckout();
+
+        CheckoutPage checkoutPage = new CheckoutPage(getDriver());
+        checkoutPage.selectNthCountry(3);
+        String currentCountry = checkoutPage.getCurrentSelectedCountry();
+
+        MyAssert ma = new MyAssert(getITestContext(), getCurrentMethodName());
+        ma.assertEq(currentCountry, "Algeria", "Expected selected country does not match");
+    }
 }

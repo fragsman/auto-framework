@@ -150,8 +150,12 @@ public class Interactor {
         result.click();
     }
 
-    public static void selectNthElement(WebDriver driver, WebElement element, int nthElement) {
-        //TODO: to implement
+    public static void selectNthElement(WebElement element, int nthElement) {
+        try{
+            element.findElements(By.tagName("li")).get(nthElement).click();
+        }catch(NullPointerException e){
+            Logger.Error("There is no such position: "+nthElement+", "+e);
+        }
     }
 
     //Wait for the overlays of the website
