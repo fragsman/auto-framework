@@ -29,6 +29,17 @@ public class ShortTests extends BaseTest{
         MyAssert ma = new MyAssert(getITestContext(),getCurrentMethodName());
         ma.assertEq(menPage.getCurrentPageInNav(), "Men", "Check that Men link leads to a page that contains 'Men' on its navigation tree");
     }
+
+    @Test(groups = {"smoke"})
+    public void seleniumActionsTest() {
+        MainPage mainPage = new MainPage(getDriver());
+        mainPage.clickOnSuperiorLink("Men");
+        MenPage menPage = new MenPage(getDriver());
+        menPage.specialSearch();
+
+        MyAssert ma = new MyAssert(getITestContext(),getCurrentMethodName());
+        ma.assertEq(menPage.getSearchResultsTitle(), "Search results: “Shoes”", "Verify the first letter is capital");
+    }
     
     @Test(groups = {"smoke"})
     public void womenLinkLeadsToWomenPage() {
