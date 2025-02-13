@@ -9,19 +9,19 @@
 		<groups>
     		<run>
       			<include name="smoke"/>
-      			<include name="regression"/>
-      			<include name="non_browser_tests"/>
-    		</run>
-  		</groups>
+				<include name="regression"/>
+                <include name="non_browser_tests"/>
+          </run>
+        </groups>
 
-        <classes>
-            <class name="selenium.askomcdh.ShortTests"/>
-            <class name="selenium.askomcdh.LongTests"/>
-            <class name="selenium.askomcdh.NumericTests"/>
-        </classes>
-    </test>
-    
-    <listeners>
-		<listener class-name="support.MyTestListener"></listener>
-	</listeners>
+      <classes>
+          <class name="selenium.askomcdh.ShortTests"/>
+          <class name="selenium.askomcdh.LongTests"/>
+          <class name="selenium.askomcdh.NumericTests"/>
+      </classes>
+  </test>
+
+  <listeners>
+      <listener class-name="support.MyTestListener"></listener>
+  </listeners>
 </suite>

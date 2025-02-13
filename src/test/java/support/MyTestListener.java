@@ -26,11 +26,12 @@ public class MyTestListener extends TestListenerAdapter {
     private ThreadLocal<ExtentTest> test = new ThreadLocal<>();
     
     @Override  
-    public void onStart(ITestContext context) {  
+    public void onStart(ITestContext context) {
+		Logger.initLogFile();
     	Logger.Info("onStart: Configuring extent report");
     	report = new ExtentReports();
     	ExtentSparkReporter spark = new ExtentSparkReporter("target/results/TestReport.html");
-        report.attachReporter(spark); 
+        report.attachReporter(spark);
     }
     
     @Override
@@ -101,4 +102,10 @@ public class MyTestListener extends TestListenerAdapter {
     	test.get().log(Status.INFO, "Test finished");
     	report.flush();
     }
+
+	@Override
+	public void onFinish(ITestContext context) {
+		Logger.Info("onFinish: Closing log writer");
+		Logger.closeWriter();
+	}
 }
