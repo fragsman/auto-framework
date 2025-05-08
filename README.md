@@ -14,6 +14,7 @@ This is a Selenium Automation framework just in case I need to use one quick and
 - Under System Variable, create a new variable named "CLASSPATH" with route to the JDK binary. Example: "C:\Program Files\Java\jdk-17\bin"
 - Under System Variables, edit "Path" and add a New one. Example: "C:\Program Files\Java\jdk-17\bin"
 - Take into account this specific framework is only currently configured for MS Edge Browser so you might have to download and copy the latest `msedgedriver.exe` into the corresponding src/main/resources folder.
+- Create a `results` folder inside `/target/`. Otherwise you might see an error and it won't be able to create the `log_run.txt` and  the `TestReport.html`.
 
 ## Running Tests 🏃
 - Here you have two options
