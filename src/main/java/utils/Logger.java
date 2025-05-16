@@ -28,20 +28,33 @@ public class Logger {
     }
 
     public static void initLogFile(){
-        try {
-            //Delete the previous log_run file
-            logFile = new File("target/results/log_run.txt");
-            Files.deleteIfExists(logFile.toPath());
-
-            //Create the file
-            if (logFile.createNewFile()) {
-                myWriter = new FileWriter("target/results/log_run.txt");
-                Info("File created: " + logFile.getName());
-            } else {
-                System.out.println("File already exists.");
+        //Create the results folder if it doesn't exist
+        File resultsFolder = new File("target/results");
+        if (!resultsFolder.exists()) {
+            if(!resultsFolder.mkdirs()) {
+                System.err.println("Failed to create results folder. Please manually create a 'results' folder under 'target' directory");
             }
-        } catch (IOException e) {
+        }
+        //Deletes the previous log file and creates the new one
+        try {
+            deletePreviousLogFile();
+            createTheLogFile();
+        }catch (IOException e) {
             Logger.Error("An error occurred creating the log file: "+e);
+        }
+    }
+
+    private static void deletePreviousLogFile() throws IOException {
+        logFile = new File("target/results/log_run.txt");
+        Files.deleteIfExists(logFile.toPath());
+    }
+
+    private static void createTheLogFile() throws IOException {
+        if (logFile.createNewFile()) {
+            myWriter = new FileWriter("target/results/log_run.txt");
+            Info("File created: " + logFile.getName());
+        } else {
+            System.out.println("File already exists.");
         }
     }
 
