@@ -25,6 +25,9 @@ This is a Selenium Automation framework just in case I need to use one quick and
 - This project is set up for being run on Github Actions. Everytime there is a Pull Request or a Push to the main branch an Action will be run and test will be executed. The report along with the results can be found in the Artifacts inside the run.
 - For more information about how is Github Actions configured, check the folder ".github/worlkflows" and the file `maven.yml`
 
+## Troubleshooting 🔧
+- If you encounter the following message `WARNING: Unable to find an exact match for CDP version 136, returning the closest version; found: 135; Please update to a Selenium version that supports CDP version 136`, update Edge Web Driver from microsoft and replace the one in `/src/main/resources`
+
 ## Additional Notes 🗒️
 - I have tried to use _BoniGarcia WebDriverManager_ to auto-download the correct detected Web Driver. I tested thoroughly a full day using Edge Version 116 and found that it was downloading an incorrect driver version. In conclusion I will avoid depending on a 3rd party library which is maintained by only one person.
   
