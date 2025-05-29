@@ -38,7 +38,7 @@ public class ShortTests extends BaseTest{
         menPage.specialSearch();
 
         MyAssert ma = new MyAssert(getITestContext(),getCurrentMethodName());
-        ma.assertEq(menPage.getSearchResultsTitle(), "Search results: “Shoes”", "Verify the first letter is capital");
+        ma.assertEq(menPage.getSearchResultsTitle(), "Search results: \u201CShoes\u201d", "Verify the first letter is capital");
     }
     
     @Test(groups = {"smoke"})
