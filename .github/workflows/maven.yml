@@ -24,11 +24,6 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    # Encode to UTF-8 because the usage of quotation mark char that breaks the compilation in Git Workflows
-    - name: Convert files to UTF-8
-      run: |
-        iconv -f ISO-8859-1 -t UTF-8 src/test/java/selenium/askomcdh/ShortTests.java -o src/test/java/selenium/askomcdh/ShortTests.java.java
-
     # Current possible values for env=[GITHUB,QA]
     - name: Test with Maven
       continue-on-error: true
