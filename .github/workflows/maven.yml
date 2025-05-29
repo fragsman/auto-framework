@@ -24,6 +24,10 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
+    - name: Set locale to UTF-8
+      run: |
+        export LANG=en_US.UTF-8
+
     # Current possible values for env=[GITHUB,QA]
     - name: Test with Maven
       continue-on-error: true
