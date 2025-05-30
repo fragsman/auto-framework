@@ -84,20 +84,20 @@ public class MyTestListener extends TestListenerAdapter {
     		}
 	    	
     		test.get().log(Status.FAIL, result.getThrowable());
-    		
-    		Object currentTestInstance = result.getInstance();
-    		File src= ((TakesScreenshot)((BaseTest)currentTestInstance).getDriver()).getScreenshotAs(OutputType.FILE);
-    		String currentWorkingDir = System.getProperty("user.dir");
-    		String filename = "error_"+result.getName().split(" ")[0]+".png";
-        	String filePath = currentWorkingDir+"\\target\\results\\images\\"+filename;
-      
-        	try {
+
+			try {
+    			Object currentTestInstance = result.getInstance();
+    			File src= ((TakesScreenshot)((BaseTest)currentTestInstance).getDriver()).getScreenshotAs(OutputType.FILE);
+    			String currentWorkingDir = System.getProperty("user.dir");
+    			String filename = "error_"+result.getName().split(" ")[0]+".png";
+        		String filePath = currentWorkingDir+"\\target\\results\\images\\"+filename;
+
         		FileUtils.copyFile(src, new File(filePath));
+				test.get().log(Status.FAIL, MediaEntityBuilder.createScreenCaptureFromPath("images\\"+filename).build());
         	}
         	catch (IOException e){
         		Logger.Error("onTestFailure: error taking screenshot: "+e.getMessage());
         	}
-        	test.get().log(Status.FAIL, MediaEntityBuilder.createScreenCaptureFromPath("images\\"+filename).build());
     	}
     	test.get().log(Status.INFO, "Test finished");
     	report.flush();
