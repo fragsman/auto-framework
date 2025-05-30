@@ -2,7 +2,6 @@ package selenium.askomcdh;
 
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
-
 import POJO.test.BillingAddress;
 import POM.CartPage;
 import POM.CheckoutPage;
@@ -17,7 +16,7 @@ import utils.JacksonUtil;
 
 public class LongTests extends BaseTest {
 
-	@Test(groups = {"regression"}) @Ignore
+	@Test(groups = {"regression"})
     public void buyAnyProductTest() {
         BillingAddress billingAddress = JacksonUtil.deserializeJson("billingAddress.json", BillingAddress.class);
 
@@ -90,5 +89,10 @@ public class LongTests extends BaseTest {
 
         MyAssert ma = new MyAssert(getITestContext(), getCurrentMethodName());
         ma.assertEq(currentCountry, "Algeria", "Expected selected country does not match");
+    }
+
+    @Test(groups = {"regression"}) @Ignore
+    public void thisIsHowYouIgnoreATest(){
+
     }
 }

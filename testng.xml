@@ -22,6 +22,6 @@
   </test>
 
   <listeners>
-      <listener class-name="support.MyTestListener"></listener>
+      <listener class-name="support.MyTestListener"/>
   </listeners>
 </suite>

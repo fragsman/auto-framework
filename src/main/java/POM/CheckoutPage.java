@@ -46,10 +46,12 @@ public class CheckoutPage extends BasePage{
 
     public void enterAddressLine1(String addressLine1){
         driver.findElement(addressLine1Input).sendKeys(addressLine1);
+        waitForBlockingOverlays();
     }
 
     public void enterCity(String city){
         driver.findElement(cityInput).sendKeys(city);
+        waitForBlockingOverlays();
     }
 
     public void enterPostalCode(String postalCode){

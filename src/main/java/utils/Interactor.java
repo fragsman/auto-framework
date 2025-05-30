@@ -20,6 +20,7 @@ public class Interactor {
     //Click that waits for element to be clickable
     public static void accurateClick(WebDriver driver, WebElement element){
         try{
+            log("accurateClick",driver,getWebElementLocator(element));
             WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
             webDriverWait.until(ExpectedConditions.elementToBeClickable(element));
             element.click();
@@ -32,6 +33,7 @@ public class Interactor {
     //A retry click after a delay
     private static void retryAccurateClick(WebDriver driver, WebElement element){
         try{
+            log("retryAccurateClick",driver,getWebElementLocator(element));
             Thread.sleep(shortRetryTimeDelay); //This is a retry. It has previously failed, so we wait.
             scrollToElement(driver, element);
             WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -46,6 +48,7 @@ public class Interactor {
     public static List<WebElement> findElements(WebDriver driver, By locator){
         List<WebElement> elements = new ArrayList<WebElement>();
         try{
+            log("findElements",driver,locator.toString());
             WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
             webDriverWait.until(ExpectedConditions.presenceOfElementLocated(locator));
             elements = driver.findElements(locator);
@@ -53,6 +56,7 @@ public class Interactor {
             Logger.Error("Failed to find elements "+locator.toString()+": retrying");
             retryFindElements(driver, locator);
         }
+        Logger.Info("findElements: "+locator+" found");
         return elements;
     }
 
@@ -60,6 +64,7 @@ public class Interactor {
     public static List<WebElement> findElements(WebDriver driver, By locator, int timeout){
         List<WebElement> elements = new ArrayList<WebElement>();
         try{
+            log("findElements",driver,locator.toString());
             WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
             webDriverWait.until(ExpectedConditions.presenceOfElementLocated(locator));
             elements = driver.findElements(locator);
@@ -74,6 +79,7 @@ public class Interactor {
     private static List<WebElement> retryFindElements(WebDriver driver, By locator){
         List<WebElement> elements = new ArrayList<WebElement>();
         try{
+            log("retryFindElements",driver,locator.toString());
             Thread.sleep(mediumRetryTimeDelay); //This is a retry. It has previously failed, so we wait.
             WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
             webDriverWait.until(ExpectedConditions.presenceOfElementLocated(locator));
@@ -88,6 +94,8 @@ public class Interactor {
     private static List<WebElement> retryFindElements(WebDriver driver, By locator, int timeout){
         List<WebElement> elements = new ArrayList<WebElement>();
         try{
+            log("retryFindElements",driver,locator.toString());
+            Logger.Info("retry findElements: "+locator);
             Thread.sleep(mediumRetryTimeDelay); //This is a retry. It has previously failed, so we wait.
             WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
             webDriverWait.until(ExpectedConditions.presenceOfElementLocated(locator));
@@ -102,6 +110,7 @@ public class Interactor {
     public static WebElement findElement(WebDriver driver, By locator){
         WebElement element = null;
         try{
+            log("findElement",driver,locator.toString());
             WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
             webDriverWait.until(ExpectedConditions.presenceOfElementLocated(locator));
             element = driver.findElement(locator);
@@ -116,6 +125,7 @@ public class Interactor {
     private static WebElement retryFindElement(WebDriver driver, By locator){
         WebElement element = null;
         try{
+            log("retryFindElement",driver,locator.toString());
             Thread.sleep(shortRetryTimeDelay); //This is a retry. It has previously failed, so we wait.
             WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(10));
             webDriverWait.until(ExpectedConditions.presenceOfElementLocated(locator));
@@ -162,5 +172,15 @@ public class Interactor {
     public static void waitForBlockingOverlays(WebDriver driver, List<WebElement> blockingOverlays){
         WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(5));
         webDriverWait.until(ExpectedConditions.invisibilityOfAllElements(blockingOverlays));
+    }
+
+    public static String getWebElementLocator(WebElement element){
+        String rawElementString = element.toString();
+        return rawElementString.split("->")[1];
+    }
+
+    private static void log(String methodName, WebDriver driver, String locator){
+        String driverId = driver.toString().split("\\(")[1].split("\\)")[0];
+        Logger.Info(methodName+": driver_"+driverId+" "+locator);
     }
 }
