@@ -56,7 +56,6 @@ public class Interactor {
             Logger.Error("Failed to find elements "+locator.toString()+": retrying");
             retryFindElements(driver, locator);
         }
-        Logger.Info("findElements: "+locator+" found");
         return elements;
     }
 
@@ -95,7 +94,6 @@ public class Interactor {
         List<WebElement> elements = new ArrayList<WebElement>();
         try{
             log("retryFindElements",driver,locator.toString());
-            Logger.Info("retry findElements: "+locator);
             Thread.sleep(mediumRetryTimeDelay); //This is a retry. It has previously failed, so we wait.
             WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
             webDriverWait.until(ExpectedConditions.presenceOfElementLocated(locator));
@@ -168,10 +166,25 @@ public class Interactor {
         }
     }
 
-    //Wait for the overlays of the website
-    public static void waitForBlockingOverlays(WebDriver driver, List<WebElement> blockingOverlays){
-        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        webDriverWait.until(ExpectedConditions.invisibilityOfAllElements(blockingOverlays));
+    /**
+     * A BlockingOverlays is basically a loading spinner that prevents the web to be used. This element does not always
+     * appear. When it does, it is for less than 2 seconds. Thus, it requires a special treatment.
+     */
+    public static void waitForBlockingOverlays(WebDriver driver){
+        final By overlayBlockers = By.cssSelector("div.blockUI.blockOverlay");
+        List<WebElement> elements = new ArrayList<WebElement>();
+        try{
+            log("findOverlays",driver,overlayBlockers.toString());
+            WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(1));
+            webDriverWait.until(ExpectedConditions.presenceOfElementLocated(overlayBlockers));
+            elements = driver.findElements(overlayBlockers);
+        }catch(Exception e){
+            Logger.Error("Failed to find overlays "+overlayBlockers);
+        }
+        if(elements.size() > 0) {
+            WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(2));
+            webDriverWait.until(ExpectedConditions.invisibilityOfAllElements(elements));
+        }
     }
 
     public static String getWebElementLocator(WebElement element){
