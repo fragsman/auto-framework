@@ -29,7 +29,7 @@ public class Logger {
 
     public static void initLogFile(){
         //Create the results folder if it doesn't exist
-        File resultsFolder = new File("target/results");
+        /*File resultsFolder = new File("target/results");
         if (!resultsFolder.exists()) {
             if(!resultsFolder.mkdirs()) {
                 System.err.println("Failed to create results folder. Please manually create a 'results' folder under 'target' directory");
@@ -41,7 +41,7 @@ public class Logger {
             createTheLogFile();
         }catch (IOException e) {
             Logger.Error("An error occurred creating the log file: "+e);
-        }
+        }*/
     }
 
     private static void deletePreviousLogFile() throws IOException {
@@ -69,18 +69,19 @@ public class Logger {
     }
 
     private static void writeToFile(String message) {
-        try {
+        /*try {
             myWriter.append(message).append(System.lineSeparator());
         } catch (IOException e) {
             Logger.Error("An error occurred writing to the log: "+e);
-        }
+        }*/
+
     }
 
     public static void closeWriter(){
-        try {
+        /*try {
             myWriter.close();
         } catch (IOException e) {
             Logger.Error("An error occurred closing the log file: "+e);
-        }
+        }*/
     }
 }
