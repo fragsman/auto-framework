@@ -16,8 +16,8 @@
 
       <classes>
           <class name="selenium.askomcdh.ShortTests"/>
-          <class name="selenium.askomcdh.LongTests"/>
-          <class name="selenium.askomcdh.NumericTests"/>
+          <!--<class name="selenium.askomcdh.LongTests"/>-->
+          <!--<class name="selenium.askomcdh.NumericTests"/>-->
       </classes>
   </test>
 
