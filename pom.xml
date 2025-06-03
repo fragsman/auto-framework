@@ -51,13 +51,6 @@
 		    <version>2.6</version>
 		</dependency>
 
-		<!--This is to avoid an error on Nullable import -->
-		<dependency>
-			<groupId>com.google.code.findbugs</groupId>
-			<artifactId>jsr305</artifactId>
-			<version>3.0.2</version>
-		</dependency>
-
 		<!-- I imported this only to prevent an error message regarding slf4j -->
 		<dependency>
 		    <groupId>org.slf4j</groupId>
@@ -76,8 +69,14 @@
 		    <artifactId>maven-surefire-plugin</artifactId>
 		    <version>3.1.2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.jetbrains</groupId>
+			<artifactId>annotations</artifactId>
+			<version>26.0.2</version>
+			<scope>compile</scope>
+		</dependency>
 
-    </dependencies>
+	</dependencies>
 
 	<build>
 		<plugins>
