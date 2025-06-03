@@ -42,6 +42,7 @@ public class DriverManager {
     	EdgeOptions options = new EdgeOptions();
     	options.setPageLoadStrategy(PageLoadStrategy.EAGER);
     	options.setPageLoadTimeout(Duration.ofSeconds(eMgr.getImplicitlyWait()));
+        options.setImplicitWaitTimeout(Duration.ofSeconds(eMgr.getImplicitlyWait()));
     	if(eMgr.isHeadless())
     		options.addArguments("--headless=chrome");
     	driver = new EdgeDriver(options);
