@@ -1,4 +1,5 @@
-# auto-framework
+![Auto Framework Logo](https://github.com/user-attachments/assets/b5b0f43d-9db8-4b39-95b5-70025e0af2e6)
+
 This is a Selenium Automation framework just in case I need to use one quick and I don't want to be setting up all from scratch.
 
 ## Technologies 👾
